@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
@@ -9,16 +9,12 @@ const Login = (props) => {
   const [emailIsValid, setEmailIsValid] = useState();
   const [enteredPassword, setEnteredPassword] = useState("");
   const [passwordIsValid, setPasswordIsValid] = useState();
-  const [enteredCollegeName, setEnteredCollegeName] = useState("");
   const [formIsValid, setFormIsValid] = useState(false);
-
   useEffect(() => {
     setFormIsValid(
-      enteredEmail.includes("@") &&
-        enteredPassword.trim().length > 6 &&
-        enteredCollegeName.trim().length > 6
+      enteredEmail.includes("@") && enteredPassword.trim().length > 6
     );
-  }, [enteredEmail, enteredPassword, enteredCollegeName]);
+  }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
@@ -26,9 +22,6 @@ const Login = (props) => {
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
-  };
-  const collegeChangeHandler = (event) => {
-    setEnteredCollegeName(event.target.value);
   };
 
   const validateEmailHandler = () => {
@@ -74,14 +67,6 @@ const Login = (props) => {
             onChange={passwordChangeHandler}
             onBlur={validatePasswordHandler}
           />
-          <br />
-          <label htmlFor="college">College Name</label>
-          <input
-            type="text"
-            id="colleg"
-            value={enteredCollegeName}
-            onChange={collegeChangeHandler}
-          ></input>
         </div>
         <div className={classes.actions}>
           <Button type="submit" className={classes.btn} disabled={!formIsValid}>

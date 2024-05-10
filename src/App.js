@@ -8,14 +8,13 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const storedUserLoggedInInfo = localStorage.getItem("isLoggedIn");
-    if (storedUserLoggedInInfo === "1") {
+    const storedUserLoggedInStatus = localStorage.getItem("isLoggedIn");
+    if (storedUserLoggedInStatus === "1") {
       setIsLoggedIn(true);
     }
-  }, []); // so I used local storage to store logged status and used useEffect to run check only 1st time while reloading the app.
+  }, []);
+
   const loginHandler = (email, password) => {
-    // We should of course check email and password
-    // But it's just a dummy/ demo anyways
     localStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
   };

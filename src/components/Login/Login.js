@@ -1,6 +1,6 @@
 // Write your code at relevant places in the code below:
 
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
@@ -37,16 +37,30 @@ const Login = (props) => {
     value: "",
     isValid: null,
   });
+  // as useEffect() fun run after the whole comp get executed so that fun will run only with latest values of emailState, passwordState. this optimise our code. This is the power of using useState wit useReducer.
+  // extracting the isValid form emailState and passwordState using object destructring:
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log("validatinh....");
+      setFormIsValid(emailIsValid && passwordIsValid);
+    }, 500);
+    return () => {
+      console.log("cleaning");
+      clearTimeout(timer);
+    };
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", payload: event.target.value });
 
-    setFormIsValid(event.target.value.includes("@") && passwordState.isValid);
+    // setFormIsValid(event.target.value.includes("@") && passwordState.isValid);
   };
 
   const passwordChangeHandler = (event) => {
     dispatchPassword({ type: "USER_INPUT", payload: event.target.value });
-    setFormIsValid(emailState.isValid && event.target.value.trim().length > 6);
+    // setFormIsValid(emailState.isValid && event.target.value.trim().length > 6);
   };
 
   const validateEmailHandler = () => {

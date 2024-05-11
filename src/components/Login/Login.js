@@ -20,7 +20,7 @@ const passwordReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
     return { value: action.payload, isValid: action.payload.trim().length > 6 };
   }
-  if (action.type === "USER_BLUR") {
+  if (action.type === "INPUT_BLUR") {
     return { value: state.value, isValid: state.value.trim().length > 6 };
   }
   return { value: "", isValid: false };
@@ -54,7 +54,7 @@ const Login = (props) => {
   };
 
   const validatePasswordHandler = () => {
-    dispatchPassword({ type: "INPUT_BLUR" });
+    dispatchPassword({ type: "INPUT_BLUR" }); // Update state on blur
   };
 
   const submitHandler = (event) => {

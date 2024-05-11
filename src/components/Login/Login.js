@@ -43,11 +43,11 @@ const Login = (props) => {
   const { isValid: passwordIsValid } = passwordState;
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log("validatinh....");
+      // console.log("validatinh....");
       setFormIsValid(emailIsValid && passwordIsValid);
     }, 500);
     return () => {
-      console.log("cleaning");
+      // console.log("cleaning");
       clearTimeout(timer);
     };
   }, [emailIsValid, passwordIsValid]);
